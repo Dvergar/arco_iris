@@ -8,7 +8,7 @@ final arcoIris = () {
 
 @immutable
 class ArcoIris extends ForegroundStyle {
-  final _customStyles = <String, List<AnsiProperty>>{};
+  final _customStyles = <String, List<Property>>{};
 
   ArcoIris withStyle(String styleName) {
     _codeStore.addAll(
@@ -17,7 +17,7 @@ class ArcoIris extends ForegroundStyle {
     return this;
   }
 
-  void addStyle(String styleName, List<AnsiProperty> properties) =>
+  void addStyle(String styleName, List<Property> properties) =>
       _customStyles[styleName] = properties;
 }
 
@@ -31,7 +31,7 @@ abstract interface class Style {
 
   String get _codes => _codeStore.isNotEmpty ? '${_codeStore.join(';')}m' : '';
 
-  T _setProperty<T extends Style>(AnsiProperty property) {
+  T _setProperty<T extends Style>(Property property) {
     _codeStore.add(property.code);
     return this as T;
   }
@@ -42,28 +42,27 @@ abstract interface class Style {
 class ForegroundStyle extends Style with WithBackground {
   ForegroundStyle() : super([]);
 
-  ForegroundStyle get black => _setProperty(AnsiProperty.black);
-  ForegroundStyle get red => _setProperty(AnsiProperty.red);
-  ForegroundStyle get green => _setProperty(AnsiProperty.green);
-  ForegroundStyle get yellow => _setProperty(AnsiProperty.yellow);
-  ForegroundStyle get blue => _setProperty(AnsiProperty.blue);
-  ForegroundStyle get magenta => _setProperty(AnsiProperty.magenta);
-  ForegroundStyle get cyan => _setProperty(AnsiProperty.cyan);
-  ForegroundStyle get white => _setProperty(AnsiProperty.white);
+  ForegroundStyle get black => _setProperty(ForegroundProperty.black);
+  ForegroundStyle get red => _setProperty(ForegroundProperty.red);
+  ForegroundStyle get green => _setProperty(ForegroundProperty.green);
+  ForegroundStyle get yellow => _setProperty(ForegroundProperty.yellow);
+  ForegroundStyle get blue => _setProperty(ForegroundProperty.blue);
+  ForegroundStyle get magenta => _setProperty(ForegroundProperty.magenta);
+  ForegroundStyle get cyan => _setProperty(ForegroundProperty.cyan);
+  ForegroundStyle get white => _setProperty(ForegroundProperty.white);
 }
 
 class BackgroundStyle extends Style {
   BackgroundStyle(super.inheritedCodeStore);
 
-  BackgroundStyle get black => _setProperty(AnsiProperty.backgroundBlack);
-  BackgroundStyle get backgroundRed => _setProperty(AnsiProperty.backgroundRed);
-  BackgroundStyle get green => _setProperty(AnsiProperty.backgroundGreen);
-  BackgroundStyle get orange => _setProperty(AnsiProperty.backgroundOrange);
-  BackgroundStyle get blue => _setProperty(AnsiProperty.backgroundBlue);
-  BackgroundStyle get purple => _setProperty(AnsiProperty.backgroundPurple);
-  BackgroundStyle get cyan => _setProperty(AnsiProperty.backgroundCyan);
-  BackgroundStyle get lightgrey =>
-      _setProperty(AnsiProperty.backgroundLightgrey);
+  BackgroundStyle get black => _setProperty(BackgroundProperty.black);
+  BackgroundStyle get backgroundRed => _setProperty(BackgroundProperty.red);
+  BackgroundStyle get green => _setProperty(BackgroundProperty.green);
+  BackgroundStyle get orange => _setProperty(BackgroundProperty.orange);
+  BackgroundStyle get blue => _setProperty(BackgroundProperty.blue);
+  BackgroundStyle get purple => _setProperty(BackgroundProperty.purple);
+  BackgroundStyle get cyan => _setProperty(BackgroundProperty.cyan);
+  BackgroundStyle get lightgrey => _setProperty(BackgroundProperty.lightgrey);
 }
 
 mixin WithBackground on Style {

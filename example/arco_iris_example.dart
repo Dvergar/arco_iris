@@ -8,8 +8,8 @@ void main() {
   // Styles
   arcoIris.addStyle(
     'myStyle',
-    [AnsiProperty.backgroundBlack, AnsiProperty.green],
+    [BackgroundProperty.black, ForegroundProperty.green],
   );
 
-  arcoIris.withStyle('myStyle').text('input');
+  arcoIris.withStyle('myStyle').text('My custom style');
 }
