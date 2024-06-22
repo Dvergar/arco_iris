@@ -1,10 +1,25 @@
+import 'package:meta/meta.dart';
+
 import 'package:arco_iris/src/properties.dart';
 
 final arcoIris = () {
   return ArcoIris();
 }();
 
-class ArcoIris extends ForegroundStyle {}
+@immutable
+class ArcoIris extends ForegroundStyle {
+  final _customStyles = <String, List<AnsiProperty>>{};
+
+  ArcoIris withStyle(String styleName) {
+    _codeStore.addAll(
+      _customStyles[styleName]?.map((color) => color.code) ?? [],
+    );
+    return this;
+  }
+
+  void addStyle(String styleName, List<AnsiProperty> properties) =>
+      _customStyles[styleName] = properties;
+}
 
 abstract interface class Style {
   final List<String> _codeStore;
