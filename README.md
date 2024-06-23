@@ -1,5 +1,7 @@
 Printer with style!
 
+_Package on pub.dev: https://pub.dev/packages/arco_iris_
+
 ## Features
 
 Damn simple api.
